@@ -1,3 +1,3 @@
-<div>
-    {{-- To attain knowledge, add things every day; To attain wisdom, subtract things every day. --}}
-</div>
+<x-layouts.app :title="__('Siswa')">{{-- atau layout kamu --}}
+    <h1>Halaman Guru</h1>
+</x-layouts.app>

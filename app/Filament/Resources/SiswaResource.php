@@ -2,23 +2,26 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SiswaResource\Pages;
-use App\Filament\Resources\SiswaResource\RelationManagers;
-use App\Models\Siswa;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use App\Models\Siswa;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Illuminate\Support\Facades\DB;
+use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\SiswaResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\SiswaResource\RelationManagers;
 
 class SiswaResource extends Resource
 {
     protected static ?string $model = Siswa::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static ?string $navigationIcon = 'hugeicons-student-card';
     protected static ?string $navigationLabel = 'Siswa SIJA';
+    protected static ?string $navigationGroup = 'Data Guru - Siswa - Industri';
 
     public static function form(Form $form): Form
     {
@@ -30,24 +33,33 @@ class SiswaResource extends Resource
                 Forms\Components\TextInput::make('nis')
                     ->required()
                     ->maxLength(5),
-                Forms\Components\FileUpload::make('foto')
-                ->label('FotoSiswa')
-                ->image()
-                ->directory('fotosiswa')
-                ->disk('public')
-                ->nullable()
-                ->acceptedFileTypes([
-                    'image/jpeg',
-                    'image/png',
-                    'image/jpg',
-                    'image/webp',
-                    'image/gif',
-                    'image/bmp',
-                    'image/svg+xml',
-                ])
-                ->maxSize(10240),
-                Forms\Components\TextInput::make('gender')
-                    ->required(),
+                FileUpload::make('user_image')
+                    ->label('Foto Siswa')
+                    ->directory('image')
+                    ->disk('public')
+                    ->image()
+                    ->dehydrated(false) // jangan simpan ke siswa
+->afterStateUpdated(function ($state, callable $set, $livewire) {
+    $siswa = $livewire->record;
+    $user = \App\Models\User::where('email', $siswa->email)->first();
+
+    if ($user && $state) {
+        // Simpan file ke folder image di disk 'public'
+        $path = $state->store('image', 'public');
+
+        // Simpan path file ke kolom 'image' di tabel users
+        $user->image = $path;
+        $user->save();
+    }
+}),
+                Forms\Components\Select::make('gender')
+                    ->label('Jenis Kelamin')
+                    ->options([
+                        'L' => 'Laki-laki',
+                        'P' => 'Perempuan',
+                    ])
+                    ->required()
+                    ->native(false),
                 Forms\Components\Textarea::make('alamat')
                     ->required()
                     ->columnSpanFull(),
@@ -77,12 +89,15 @@ class SiswaResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('nis')
                     ->searchable(),
-                Tables\Columns\ImageColumn::make('foto')
-                    ->disk('public')
-                    ->label('Foto Siswa')
-                    ->circular(),
+Tables\Columns\ImageColumn::make('user.image')
+    ->disk('public')
+    ->label('Foto Siswa')
+    ->circular()
+    ->getStateUsing(fn ($record) => $record->user?->image),
+
                 Tables\Columns\TextColumn::make('gender')
-                    ->sortable(),
+                    ->label('Jenis Kelamin')
+                    ->getStateUsing(fn($record) => DB::selectOne("SELECT getGenderCode(?) AS label", [$record->gender])->label),
                 Tables\Columns\TextColumn::make('kontak')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')

@@ -2,16 +2,17 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\GuruResource\Pages;
-use App\Filament\Resources\GuruResource\RelationManagers;
-use App\Models\Guru;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
+use App\Models\Guru;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\GuruResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\GuruResource\RelationManagers;
 
 class GuruResource extends Resource
 {
@@ -19,6 +20,7 @@ class GuruResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
     protected static ?string $navigationLabel = 'Guru SIJA';
+    protected static ?string $navigationGroup = 'Data Guru - Siswa - Industri';
 
     public static function form(Form $form): Form
     {
@@ -30,8 +32,15 @@ class GuruResource extends Resource
                 Forms\Components\TextInput::make('nip')
                     ->required()
                     ->maxLength(18),
-                Forms\Components\TextInput::make('gender')
-                    ->required(),
+                Forms\Components\Select::make('gender')
+                    ->label('Jenis Kelamin')
+                    ->options([
+                        'L' => 'Laki-laki',
+                        'P' => 'Perempuan',
+                    ])
+                    ->required()
+                    ->native(false),
+
                 Forms\Components\Textarea::make('alamat')
                     ->required()
                     ->columnSpanFull(),
@@ -53,7 +62,10 @@ class GuruResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('nip')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('gender'),
+                Tables\Columns\TextColumn::make('gender')
+                    ->label('Jenis Kelamin')
+                    ->getStateUsing(fn($record) => DB::selectOne("SELECT getGenderCode(?) AS label", [$record->gender])->label),
+
                 Tables\Columns\TextColumn::make('kontak')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')

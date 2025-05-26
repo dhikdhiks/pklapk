@@ -24,6 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'email_verified_at',
+        'image',
     ];
 
     /**
@@ -61,7 +62,7 @@ class User extends Authenticatable
     }
     public function siswa()
 {
-    return $this->hasOne(\App\Models\Siswa::class, 'email', 'email');
+    return $this->hasOne(\App\Models\Siswa::class, 'email');
 }
 
 }

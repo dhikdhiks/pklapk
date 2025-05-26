@@ -1,0 +1,53 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.filament-stats-overview-widget {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-6 p-6;
+}
+
+.filament-stats-overview-widget .filament-card {
+    @apply bg-white rounded-xl p-6 shadow-lg transition-all duration-300;
+}
+
+.filament-stats-overview-widget .filament-stat {
+    @apply flex items-center space-x-4;
+}
+
+.filament-stats-overview-widget .filament-stat-label {
+    @apply text-lg font-semibold text-gray-800;
+}
+
+.filament-stats-overview-widget .filament-stat-value {
+    @apply text-3xl font-bold;
+}
+
+.filament-stats-overview-widget .filament-stat-description {
+    @apply text-sm text-gray-600 mt-1;
+}
+
+.filament-stats-overview-widget .filament-stat-icon {
+    @apply w-10 h-10;
+}
+
+.filament-widget-heading {
+    @apply text-center text-xl font-bold text-gray-900 dark:text-gray-100;
+}
+
+
+.filament-charts-component {
+    @apply bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transition-all duration-300;
+}
+
+.filament-charts-component canvas {
+    @apply max-h-96 w-full;
+}
+
+.filament-charts-component .chart-title {
+    @apply text-gray-900 dark:text-gray-100;
+}
+
+.filament-charts-component .chart-legend {
+    @apply text-gray-700 dark:text-gray-300;
+} */

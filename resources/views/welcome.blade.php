@@ -1,97 +1,293 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PKL - Praktik Kerja Lapangan</title>
-
-    <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
-
-    <!-- Tailwind CSS -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nebula | Future Interface</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cosmic: {
+                            light: '#6EE7F2',
+                            DEFAULT: '#00D1E0',
+                            dark: '#00A3B5',
+                        },
+                        void: {
+                            light: '#1E293B',
+                            DEFAULT: '#0F172A',
+                            dark: '#020617',
+                        },
+                        nebula: '#7C3AED'
+                    },
+                    fontFamily: {
+                        grotesk: ['Space Grotesk', 'sans-serif'],
+                        mono: ['Space Mono', 'monospace'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        body {
-            font-family: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+        .cyber-glow {
+            text-shadow: 0 0 10px rgba(110, 231, 242, 0.7);
+        }
+        .grid-pattern {
+            background-image:
+                linear-gradient(to right, rgba(124, 58, 237, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(124, 58, 237, 0.1) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .terminal-box {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            box-shadow: 0 0 40px rgba(124, 58, 237, 0.1);
         }
     </style>
 </head>
-<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white flex flex-col min-h-screen">
-    <!-- Header -->
-    <header class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-        <div class="flex items-center">
-            <h1 class="text-2xl font-semibold">PKL Portal</h1>
-        </div>
-        <nav class="flex items-center gap-4">
-            <a href="{{ route('login') }}"
-               class="inline-block px-5 py-1.5 dark:text-white text-gray-900 border border-transparent hover:border-gray-300 dark:hover:border-gray-600 rounded-sm text-sm leading-normal">
-                Log in
-            </a>
-            <a href="{{ route('login') }}"
-               class="inline-block px-5 py-1.5 dark:text-white border border-gray-300 hover:border-gray-400 dark:border-gray-600 dark:hover:border-gray-500 rounded-sm text-sm leading-normal">
-                Register
-            </a>
-        </nav>
-    </header>
+<body class="bg-void-DEFAULT font-grotesk text-gray-200 overflow-x-hidden">
+    <!-- Animated Background -->
+    <div class="fixed inset-0 overflow-hidden -z-10 grid-pattern">
+        <div class="absolute inset-0 bg-gradient-to-br from-void-dark via-void-DEFAULT to-void-light opacity-90"></div>
+        <div class="absolute top-1/4 -left-40 w-96 h-96 bg-cosmic-DEFAULT rounded-full opacity-10 blur-3xl"></div>
+        <div class="absolute bottom-1/4 -right-40 w-96 h-96 bg-nebula rounded-full opacity-10 blur-3xl"></div>
+    </div>
 
-    <!-- Banner -->
-    <section class="w-full bg-gradient-to-r from-blue-600 to-blue-800 dark:from-blue-800 dark:to-gray-900 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col lg:flex-row items-center">
-            <div class="lg:w-1/2 mb-8 lg:mb-0">
-                <h2 class="text-4xl font-bold mb-4">Selamat Datang di Portal PKL</h2>
-                <p class="text-lg mb-6">Temukan pengalaman praktik kerja lapangan yang memperkaya pengetahuan dan keterampilan Anda. Bergabunglah sekarang untuk memulai perjalanan profesional Anda!</p>
-                <a href="{{ route('login') }}"
-                   class="inline-block px-6 py-2 bg-white text-blue-600 font-semibold rounded-md hover:bg-gray-100">
-                    Mulai Sekarang
-                </a>
+    <!-- Navigation -->
+    <nav class="container mx-auto px-6 py-6">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-cosmic-DEFAULT rounded-lg flex items-center justify-center rotate-45">
+                    <span class="-rotate-45 font-mono font-bold text-void-DEFAULT">N</span>
+                </div>
+                <span class="text-xl font-bold tracking-tighter">NEBULA</span>
             </div>
-            <div class="lg:w-1/2">
-                <img src="https://via.placeholder.com/600x400?text=PKL+Banner" alt="PKL Banner" class="w-full rounded-lg shadow-lg">
+
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#" class="hover:text-cosmic-light transition-colors duration-300">Products</a>
+                <a href="#" class="hover:text-cosmic-light transition-colors duration-300">Solutions</a>
+                <a href="#" class="hover:text-cosmic-light transition-colors duration-300">Pricing</a>
+                <a href="#" class="hover:text-cosmic-light transition-colors duration-300">Developers</a>
+            </div>
+
+                <div class="flex items-center space-x-4">
+                    <a
+                        href="{{ route('login') }}"
+                        class="px-5 py-2 rounded-md border border-cosmic-DEFAULT text-cosmic-DEFAULT hover:bg-cosmic-DEFAULT hover:bg-opacity-10 transition-colors duration-300 font-medium"
+                    >
+                        Sign In
+                    </a>
+                </div>
+
+
+            <button class="md:hidden text-cosmic-DEFAULT">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="container mx-auto px-6 py-20 md:py-32">
+        <div class="flex flex-col lg:flex-row items-center">
+            <div class="lg:w-1/2 mb-16 lg:mb-0">
+                <div class="mb-8 inline-block terminal-box px-4 py-2 rounded-md">
+                    <span class="text-cosmic-DEFAULT font-mono">v4.2.0</span>
+                    <span class="text-gray-400 font-mono ml-3">// Latest release</span>
+                </div>
+
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-8">
+                    <span class="text-cosmic-light cyber-glow">Build the future</span><br>
+                    with our <span class="text-transparent bg-clip-text bg-gradient-to-r from-cosmic-light to-nebula">cosmic toolkit</span>
+                </h1>
+
+                <p class="text-lg text-gray-300 mb-10 max-w-lg">
+                    The most advanced development platform for next-gen applications. Harness stellar performance with our quantum-powered infrastructure.
+                </p>
+
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
+                    <button class="px-8 py-4 bg-gradient-to-r from-cosmic-DEFAULT to-cosmic-dark rounded-lg text-void-DEFAULT font-bold hover:opacity-90 transition-all duration-300 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clip-rule="evenodd" />
+                        </svg>
+                        Download SDK
+                    </button>
+                    <button class="px-8 py-4 border border-gray-600 rounded-lg font-medium hover:border-cosmic-DEFAULT hover:text-cosmic-light transition-all duration-300 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        Watch Demo
+                    </button>
+                </div>
+
+                <div class="mt-12 flex items-center space-x-6">
+                    <div class="flex -space-x-3">
+                        <img class="w-10 h-10 rounded-full border-2 border-void-DEFAULT" src="https://randomuser.me/api/portraits/women/44.jpg" alt="User">
+                        <img class="w-10 h-10 rounded-full border-2 border-void-DEFAULT" src="https://randomuser.me/api/portraits/men/32.jpg" alt="User">
+                        <img class="w-10 h-10 rounded-full border-2 border-void-DEFAULT" src="https://randomuser.me/api/portraits/women/68.jpg" alt="User">
+                    </div>
+                    <div>
+                        <p class="text-gray-400 text-sm">Trusted by stellar teams at</p>
+                        <div class="flex items-center space-x-4 mt-1">
+                            <span class="font-mono">NASA</span>
+                            <span class="font-mono">SpaceX</span>
+                            <span class="font-mono">CERN</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:w-1/2 lg:pl-16 relative">
+                <div class="relative animation-float">
+                    <div class="terminal-box rounded-2xl overflow-hidden">
+                        <div class="p-4 border-b border-gray-800 flex space-x-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <div class="p-6 font-mono text-sm">
+                            <div class="text-cosmic-DEFAULT">$ <span class="text-gray-300">nebula init stellar-app</span></div>
+                            <div class="text-gray-500 mt-2">> Initializing quantum core...</div>
+                            <div class="text-gray-500">> Configuring hyperspace modules</div>
+                            <div class="text-green-400">✓ Success! Project created</div>
+                            <div class="mt-4 text-cosmic-DEFAULT">$ <span class="text-gray-300">cd stellar-app</span></div>
+                            <div class="text-cosmic-DEFAULT">$ <span class="text-gray-300">nebula deploy --prod</span></div>
+                            <div class="text-gray-500 mt-2">> Deploying to cosmic cluster...</div>
+                            <div class="text-green-400 mt-4">🚀 Deployment complete!</div>
+                            <div class="text-gray-300 mt-2">https://stellar-app.nebula.dev</div>
+                        </div>
+                    </div>
+
+                    <div class="absolute -z-10 -inset-4 bg-gradient-to-r from-cosmic-DEFAULT to-nebula rounded-2xl opacity-20 blur-xl"></div>
+                </div>
+
+                <div class="absolute -right-20 top-1/4 hidden xl:block">
+                    <div class="relative animation-float" style="animation-delay: 1s;">
+                        <div class="w-48 h-48 bg-gradient-to-br from-cosmic-DEFAULT to-nebula rounded-2xl opacity-80"></div>
+                        <div class="absolute inset-0 border border-cosmic-light rounded-2xl opacity-30 m-2"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Information Section -->
-    <section class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h2 class="text-3xl font-semibold text-center mb-8">Tujuan PKL</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-                <h3 class="text-xl font-medium mb-2">Pengalaman Nyata</h3>
-                <p class="text-gray-600 dark:text-gray-300">Dapatkan pengalaman kerja langsung di industri ternama untuk membangun portofolio Anda.</p>
+    <!-- Features Grid -->
+    <section class="container mx-auto px-6 py-20">
+        <div class="text-center mb-20">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-cosmic-light to-nebula">Quantum Features</span>
+            </h2>
+            <p class="text-gray-400 max-w-2xl mx-auto">
+                Engineered for performance at cosmic scale
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="terminal-box p-8 rounded-xl hover:border-cosmic-DEFAULT transition-all duration-300">
+                <div class="w-12 h-12 bg-cosmic-DEFAULT bg-opacity-20 rounded-lg flex items-center justify-center mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-cosmic-DEFAULT" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Hyperspeed Compilation</h3>
+                <p class="text-gray-400">
+                    Our quantum compiler processes code at near-light speed, reducing build times by 99.9%.
+                </p>
             </div>
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-                <h3 class="text-xl font-medium mb-2">Jaringan Profesional</h3>
-                <p class="text-gray-600 dark:text-gray-300">Terhubung dengan profesional di bidang Anda dan bangun jaringan untuk masa depan.</p>
+
+            <div class="terminal-box p-8 rounded-xl hover:border-cosmic-DEFAULT transition-all duration-300">
+                <div class="w-12 h-12 bg-cosmic-DEFAULT bg-opacity-20 rounded-lg flex items-center justify-center mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-cosmic-DEFAULT" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Zero-Trust Security</h3>
+                <p class="text-gray-400">
+                    Military-grade encryption with quantum-resistant algorithms protects your data across all dimensions.
+                </p>
             </div>
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-                <h3 class="text-xl font-medium mb-2">Pembelajaran Praktis</h3>
-                <p class="text-gray-600 dark:text-gray-300">Pelajari keterampilan praktis yang relevan dengan kebutuhan industri saat ini.</p>
+
+            <div class="terminal-box p-8 rounded-xl hover:border-cosmic-DEFAULT transition-all duration-300">
+                <div class="w-12 h-12 bg-cosmic-DEFAULT bg-opacity-20 rounded-lg flex items-center justify-center mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-cosmic-DEFAULT" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold mb-4">AI Co-Developer</h3>
+                <p class="text-gray-400">
+                    Our neural network suggests optimizations and writes boilerplate in real-time as you code.
+                </p>
+            </div>
+
+            <div class="terminal-box p-8 rounded-xl hover:border-cosmic-DEFAULT transition-all duration-300">
+                <div class="w-12 h-12 bg-cosmic-DEFAULT bg-opacity-20 rounded-lg flex items-center justify-center mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-cosmic-DEFAULT" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Multi-Dimensional DB</h3>
+                <p class="text-gray-400">
+                    Store data across 11 dimensions with our proprietary quantum database technology.
+                </p>
+            </div>
+
+            <div class="terminal-box p-8 rounded-xl hover:border-cosmic-DEFAULT transition-all duration-300">
+                <div class="w-12 h-12 bg-cosmic-DEFAULT bg-opacity-20 rounded-lg flex items-center justify-center mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-cosmic-DEFAULT" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Self-Healing Code</h3>
+                <p class="text-gray-400">
+                    Our runtime automatically patches vulnerabilities and optimizes performance in production.
+                </p>
+            </div>
+
+            <div class="terminal-box p-8 rounded-xl hover:border-cosmic-DEFAULT transition-all duration-300">
+                <div class="w-12 h-12 bg-cosmic-DEFAULT bg-opacity-20 rounded-lg flex items-center justify-center mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-cosmic-DEFAULT" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Universal Package Manager</h3>
+                <p class="text-gray-400">
+                    Install any dependency from any programming language, era, or dimension with a single command.
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- Call to Action -->
-    <section class="w-full bg-blue-100 dark:bg-gray-800 text-center py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-semibold mb-4">Siap Memulai PKL Anda?</h2>
-            <p class="text-lg text-gray-600 dark:text-gray-300 mb-6">Daftar sekarang dan temukan peluang PKL yang sesuai dengan minat dan bakat Anda.</p>
-            <a href="{{ route('login') }}"
-               class="inline-block px-6 py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700">
-                Daftar Sekarang
-            </a>
+    <!-- CTA Section -->
+    <section class="container mx-auto px-6 py-32 text-center">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8">
+                Ready to <span class="text-transparent bg-clip-text bg-gradient-to-r from-cosmic-light to-nebula">launch</span> your project into orbit?
+            </h2>
+            <p class="text-xl text-gray-300 mb-10">
+                Join thousands of developers building the future with our cosmic development platform.
+            </p>
+            <button class="px-10 py-4 bg-gradient-to-r from-cosmic-DEFAULT to-nebula rounded-lg text-void-DEFAULT font-bold hover:opacity-90 transition-all duration-300">
+                Start Free Trial
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 inline" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+            </button>
         </div>
     </section>
-
-    <!-- Footer -->
-    <footer class="w-full bg-gray-200 dark:bg-gray-800 py-6 mt-auto">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-600 dark:text-gray-300">
-            <p>&copy; 2025 PKL Portal. All rights reserved.</p>
-        </div>
-    </footer>
 </body>
 </html>
