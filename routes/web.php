@@ -4,8 +4,8 @@ use App\Livewire\Settings\Profile;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Appearance;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\GuruController;
-use App\Http\Controllers\SiswaController;
+use App\Livewire\Front\Siswa\Index as SiswaIndex;
+use App\Livewire\Front\Guru\Index as GuruIndex;
 
 // Route::get('/siswa', function () {
 //     return "Siswa";
@@ -16,8 +16,8 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/guru', [GuruController::class, 'index'])->name('guru');
-Route::get('/siswa', [SiswaController::class, 'index'])->name('siswa');
+Route::get('/guru', GuruIndex::class)->name('guru');
+Route::get('/siswa', SiswaIndex::class)->name('siswa');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'role:Siswa|Admin', 'check_user_email'])

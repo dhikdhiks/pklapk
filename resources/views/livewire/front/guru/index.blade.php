@@ -1,3 +1,4 @@
-<x-layouts.app :title="__('Siswa')">{{-- atau layout kamu --}}
+<div >
     <h1>Halaman Guru</h1>
-</x-layouts.app>
+</div>
+
