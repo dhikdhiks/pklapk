@@ -13,9 +13,9 @@
         <flux:button wire:click="sendVerification" variant="primary" class="w-full">
             {{ __('Resend verification email') }}
         </flux:button>
-
-        <flux:link class="text-sm cursor-pointer" wire:click="logout">
-            {{ __('Log out') }}
+        <flux:link href="{{ route('login') }}" class="text-sm cursor-pointer">
+            {{ __('Log in') }}
         </flux:link>
+
     </div>
 </div>

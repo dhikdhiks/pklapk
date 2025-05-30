@@ -1,13 +1,16 @@
 <?php
 
-namespace App\Livewire\Front;
-
+namespace App\Livewire\Front\Industri;
 use Livewire\Component;
+use App\Models\Industri;
 
-class Industri extends Component
+class Index extends Component
 {
     public function render()
     {
-        return view('livewire.front.industri.index');
+        $industris = Industri::all();
+        return view('livewire.front.industri.index', [
+            'industris' => $industris,
+        ]);
     }
 }

@@ -64,7 +64,7 @@ class GuruResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('gender')
                     ->label('Jenis Kelamin')
-                    ->getStateUsing(fn($record) => DB::selectOne("SELECT getGenderCode(?) AS label", [$record->gender])->label),
+                    ->getStateUsing(fn($record) => $record->gender === 'L' ? 'Laki-laki' : 'Perempuan'),
 
                 Tables\Columns\TextColumn::make('kontak')
                     ->searchable(),

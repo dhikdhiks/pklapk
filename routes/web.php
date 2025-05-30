@@ -6,6 +6,9 @@ use App\Livewire\Settings\Appearance;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Front\Siswa\Index as SiswaIndex;
 use App\Livewire\Front\Guru\Index as GuruIndex;
+use App\Livewire\Front\Industri\Index as IndustriIndex;
+use App\Livewire\Front\Pkl\Index as PklIndex;
+use App\Livewire\Front\Home\Index as HomeIndex;
 
 // Route::get('/siswa', function () {
 //     return "Siswa";
@@ -14,13 +17,17 @@ use App\Livewire\Front\Guru\Index as GuruIndex;
 
 Route::get('/', function () {
     return view('welcome');
-})->name('home');
+})->name('homescreen');
 
 Route::get('/guru', GuruIndex::class)->name('guru');
 Route::get('/siswa', SiswaIndex::class)->name('siswa');
+Route::get('/industri', IndustriIndex::class)->name('industri');
+Route::get('/pkl', PklIndex::class)->name('pkl');
+Route::get('/home', HomeIndex::class)->name('home');
+
 
 Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'role:Siswa|Admin', 'check_user_email'])
+    ->middleware(['auth','verified', 'role:Siswa|super_admin|Guru|Admin', 'check_user_email'])
     ->name('dashboard');
 
 
