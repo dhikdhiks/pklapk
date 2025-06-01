@@ -1,0 +1,9 @@
+{
+    admin off
+    auto_https off
+}
+
+http://127.0.0.1:8000 {
+    root * /var/www/UKK/pkl-apk-1-6/public
+    php_server
+}

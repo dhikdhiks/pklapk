@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Siswa extends Model
 {
+     protected $table = 'siswas';
+     
     protected $fillable = ['id','nama','nis','gender','alamat','kontak','email','status_lapor_pkl', 'foto'];
 
     public function pkls() {

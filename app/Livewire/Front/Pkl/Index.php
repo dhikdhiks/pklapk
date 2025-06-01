@@ -18,7 +18,7 @@ class Index extends Component
     public $siswaId, $industriId, $guruId, $mulai, $selesai;
     public $isOpen = false;
     public $rowPerPage = 3;
-    public $search;
+    public $search = '';
     public $userMail;
 
     public function mount()
@@ -31,10 +31,19 @@ class Index extends Component
         $query = Pkl::latest();
 
         if ($this->search) {
-            $query->whereHas('siswa', function ($q) {
-                $q->where('nama', 'like', '%' . $this->search . '%');
-            })->orWhereHas('industri', function ($q) {
-                $q->where('nama', 'like', '%' . $this->search . '%');
+            $query->where(function ($q) {
+                $q->whereHas('siswa', function ($s) {
+                    $s->where('nama', 'like', '%' . $this->search . '%');
+                })
+                ->orWhereHas('industri', function ($i) {
+                    $i->where('nama', 'like', '%' . $this->search . '%')
+                      ->orWhere('bidang_usaha', 'like', '%' . $this->search . '%');
+                })
+                ->orWhereHas('guru', function ($g) {
+                    $g->where('nama', 'like', '%' . $this->search . '%');
+                })
+                ->orWhere('mulai', 'like', '%' . $this->search . '%')
+                ->orWhere('selesai', 'like', '%' . $this->search . '%');
             });
         }
 
@@ -44,6 +53,17 @@ class Index extends Component
             'industris' => Industri::all(),
             'gurus' => Guru::all(),
         ]);
+    }
+
+    public function searchData()
+    {
+        $this->resetPage(); // Reset pagination ke halaman 1 saat pencarian dilakukan
+    }
+
+    public function clearSearch()
+    {
+        $this->search = '';
+        $this->resetPage();
     }
 
     public function create()
@@ -92,7 +112,6 @@ class Index extends Component
                 return redirect()->route('dashboard')->with('error', 'Transaksi dibatalkan: Siswa sudah melapor.');
             }
 
-            // Simpan data PKL
             Pkl::create([
                 'siswa_id' => $this->siswaId,
                 'industri_id' => $this->industriId,
@@ -101,7 +120,6 @@ class Index extends Component
                 'selesai' => $this->selesai,
             ]);
 
-            // Update status siswa
             $siswa->update(['status_lapor_pkl' => 1]);
 
             DB::commit();

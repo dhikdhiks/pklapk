@@ -22,29 +22,31 @@
                         <div class="mb-4"></div>
                         <!-- Informasi siswa -->
                         <div class="flex flex-col justify-between flex-1 w-full">
-                            <div class="w-full text-left space-y-1 text-sm text-gray-400 font-mono min-h-[140px]">
-                                <p><span class="font-semibold text-cosmic-DEFAULT">NIS:</span> {{ $siswa->nis }}</p>
-                                <p><span class="font-semibold text-cosmic-DEFAULT">Email:</span> {{ $siswa->email }}</p>
-                                <p><span class="font-semibold text-cosmic-DEFAULT">Gender:</span> {{ $siswa->gender }}</p>
-                                <p><span class="font-semibold text-cosmic-DEFAULT">Kontak:</span> {{ $siswa->kontak }}</p>
-                                <p><span class="font-semibold text-cosmic-DEFAULT">Alamat:</span> {{ $siswa->alamat }}</p>
+                            <div class="w-full text-left space-y-1 text-sm text-dark font-mono min-h-[140px]">
+                                <p><span class="font-semibold text-dark">NIS:</span> {{ $siswa->nis }}</p>
+                                <p><span class="font-semibold text-dark">Email:</span> {{ $siswa->email }}</p>
+                                <p><span class="font-semibold text-dark">Gender:</span> {{ $siswa->gender }}</p>
+                                <p><span class="font-semibold text-dark">Kontak:</span> {{ $siswa->kontak }}</p>
+                                <p><span class="font-semibold text-dark">Alamat:</span> {{ $siswa->alamat }}</p>
                             </div>
                             <!-- Status -->
                             <div class="mt-4">
-                                <span class="inline-flex items-center px-3 py-1 text-sm font-medium rounded-full
-                                    {{ $siswa->status_lapor_pkl ? 'bg-green-500 bg-opacity-20 text-green-400' : 'bg-red-500 bg-opacity-20 text-red-400' }}">
-                                    @if ($siswa->status_lapor_pkl)
-                                        <svg class="w-4 h-4 mr-1 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                        Sudah Lapor
-                                    @else
-                                        <svg class="w-4 h-4 mr-1 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                                        </svg>
-                                        Belum Lapor
-                                    @endif
-                                </span>
+                            <span class="inline-flex items-center px-3 py-1 text-sm font-medium rounded-full
+                                {{ $siswa->status_lapor_pkl ? 'bg-green-500 bg-opacity-20' : 'bg-red-500 bg-opacity-20' }} 
+                                text-black dark:text-white">
+                                @if ($siswa->status_lapor_pkl)
+                                    <svg class="w-4 h-4 mr-1 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    Sudah Lapor
+                                @else
+                                    <svg class="w-4 h-4 mr-1 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                    Belum Lapor
+                                @endif
+                            </span>
+
                             </div>
                         </div>
                     </div>

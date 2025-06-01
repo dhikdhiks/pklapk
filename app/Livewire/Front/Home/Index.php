@@ -5,11 +5,13 @@ namespace App\Livewire\Front\Home;
 use Livewire\Component;
 use App\Models\Siswa;
 use App\Models\Pkl;
+use App\Models\Guru;
 use Illuminate\Support\Facades\Auth;
 
 class Index extends Component
 {
     public $siswa;
+    public $guru;
     public $pkl;
     public $statusLaporan;
     public $totalPkl;
@@ -20,7 +22,18 @@ class Index extends Component
     {
         $user = Auth::user();
 
-        if ($user) {
+        if (!$user) {
+            // Redirect to login if user is not authenticated
+            return redirect()->route('login');
+        }
+
+        // Ambil data guru jika role Guru
+        if ($user->hasRole('Guru')) {
+            $this->guru = Guru::where('email', $user->email)->first();
+            if (!$this->guru) {
+                session()->flash('error', 'Data guru tidak ditemukan. Silakan hubungi administrator.');
+            }
+        } else {
             // Ambil data siswa berdasarkan email user yang login
             $this->siswa = Siswa::where('email', $user->email)->first();
 
@@ -45,9 +58,6 @@ class Index extends Component
                 // Flash error message if no Siswa record is found
                 session()->flash('error', 'Data siswa tidak ditemukan. Silakan hubungi administrator.');
             }
-        } else {
-            // Redirect to login if user is not authenticated
-            return redirect()->route('login');
         }
 
         // Set greeting berdasarkan waktu
@@ -84,8 +94,11 @@ class Index extends Component
         session()->flash('error', 'Tidak ada laporan PKL untuk dilihat.');
     }
 
-    public function render()
-    {
-        return view('livewire.front.home.index');
-    }
+public function render()
+{
+    return view('livewire.front.home.index', [
+        'guru' => $this->guru,
+        'siswa' => $this->siswa,
+    ]);
+}
 }

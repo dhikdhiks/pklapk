@@ -65,9 +65,10 @@ class User extends Authenticatable
     return $this->hasOne(\App\Models\Siswa::class, 'email');
 }
 
-    public function guru()
+public function guru()
 {
-    return $this->hasOne(\App\Models\Guru::class, 'email');
+    return $this->hasOne(Guru::class, 'email', 'email');
 }
+
 
 }

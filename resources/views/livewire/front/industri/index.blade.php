@@ -25,11 +25,11 @@
                 <tbody class="divide-y divide-cosmic-DEFAULT divide-opacity-30">
                     @forelse ($industris as $index => $industri)
                         <tr class="{{ $index % 2 === 0 ? 'bg-void-light bg-opacity-10' : 'bg-void-DEFAULT bg-opacity-10' }} hover:bg-cosmic-DEFAULT hover:bg-opacity-10 transition-colors duration-200">
-                            <td class="px-6 py-4 whitespace-nowrap text-cosmic-light font-mono">{{ $industri->nama }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-gray-400 font-mono">{{ $industri->alamat }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-gray-400 font-mono">{{ $industri->kontak }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-gray-400 font-mono">{{ $industri->bidang_usaha }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-gray-400 font-mono">{{ $industri->pkls->count() }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-white font-mono">{{ $industri->nama }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-white font-mono">{{ $industri->alamat }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-white font-mono">{{ $industri->kontak }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-white font-mono">{{ $industri->bidang_usaha }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-white font-mono">{{ $industri->pkls->count() }}</td>
                         </tr>
                     @empty
                         <tr>
